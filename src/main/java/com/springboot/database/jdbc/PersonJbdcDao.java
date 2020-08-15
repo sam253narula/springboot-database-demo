@@ -12,14 +12,15 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
 
 import com.springboot.database.entity.Person;
+import com.springboot.database.entity.Student;
 
 @Repository
 public class PersonJbdcDao {
 
 	@Autowired
 	JdbcTemplate jdbcTemplate;
-	
-	class PersonRowMapper implements RowMapper<Person>{
+
+	class PersonRowMapper implements RowMapper<Person> {
 		@Override
 		public Person mapRow(ResultSet rs, int rowNum) throws SQLException {
 			Person person = new Person();
@@ -29,9 +30,18 @@ public class PersonJbdcDao {
 			person.setBirthDate(rs.getTimestamp("birth_date"));
 			return person;
 		}
-		
+
 	}
-	
+
+	class StudentRowMapper implements RowMapper<Student> {
+		@Override
+		public Student mapRow(ResultSet rs, int rowNum) throws SQLException {
+
+			return Student.builder().id(rs.getInt("id")).name(rs.getString("name")).build();
+		}
+
+	}
+
 	public List<Person> findAll() {
 		return jdbcTemplate.query("select * from person", new PersonRowMapper());
 	}
@@ -55,6 +65,10 @@ public class PersonJbdcDao {
 		return jdbcTemplate.update("update person " + " set name = ?, location = ?, birth_date = ? " + " where id = ?",
 				new Object[] { person.getName(), person.getLocation(), new Timestamp(person.getBirthDate().getTime()),
 						person.getId() });
+	}
+
+	public List<Student> findAllStudents() {
+		return jdbcTemplate.query("select * from student", new StudentRowMapper());
 	}
 
 }

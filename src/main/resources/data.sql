@@ -15,4 +15,5 @@ INSERT INTO PERSON (ID, NAME, LOCATION, BIRTH_DATE )
 VALUES(10002,  'James', 'New York',sysdate());
 INSERT INTO PERSON (ID, NAME, LOCATION, BIRTH_DATE ) 
 VALUES(10003,  'Pieter', 'Amsterdam',sysdate());
-
+INSERT INTO Student (ID, NAME ) 
+VALUES(10003,  'Pieter');

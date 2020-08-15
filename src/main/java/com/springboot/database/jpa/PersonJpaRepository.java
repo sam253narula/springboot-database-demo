@@ -18,7 +18,8 @@ public class PersonJpaRepository {
 	// connect to the database
 	@PersistenceContext
 	EntityManager entityManager;
-
+	
+	
 	public List<Person> findAll() {
 		TypedQuery<Person> namedQuery = entityManager.createNamedQuery("find_all_persons", Person.class);
 		return namedQuery.getResultList();

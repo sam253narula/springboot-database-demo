@@ -39,6 +39,8 @@ public class SpringJdbcDemoApplication implements CommandLineRunner {
 		
 		logger.info("Update 10003 -> {}", 
 				dao.update(new Person(10003, "Pieter", "Utrecht", new Date())));
+		logger.info("findAllStudents -> {}", 
+				dao.findAllStudents());
 		
 	}
 }
